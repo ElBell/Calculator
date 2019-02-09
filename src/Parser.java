@@ -2,7 +2,7 @@ public class Parser {
     public Parser() {
 
     }
-    public Calculation parse(String rawInput){
+    public Calculations parse(String rawInput){
         String[] brokenInput = breakIntoArray(rawInput);
         String[] sortedInput = sortByOperation(brokenInput);
         //Calculation calculationTree = parseCalculations(sortedInput);
@@ -17,7 +17,7 @@ public class Parser {
         return null;
     }
 
-    public String[] sortByOperation(String sortedBroken){
+    public String[] sortByOperation(String[] sortedBroken){
         //Djikstra's Shunting Yard
         return null;
     }
