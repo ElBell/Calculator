@@ -1,0 +1,44 @@
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+@startuml
+
+class ScientificCalculator {
+String expression = Display.getString("Imput calculation");
+Calculations calculation = Parse.parse(expression);
+Number result = calculation.evaluate();
+Display.println(result);
+}
+
+class Parser {
+public Calculation parse()
+}
+
+class Display {
+public String getString(message to user)
+public println(result)
+}
+
+Interface Calculations {
+public Number evaluate()
+}
+
+class Value extends Calculations {
+   Number evaluate(Number number)
+   { return number; }
+}
+
+class Add extends Calculations {
+    Number evaluate(Calculation left, Calculation right) {
+        return left.evaluate() + right.evaluate(); }
+
+}
+
+class Square extends Calculations {
+    Number evaluate(Calculation arg)
+    {Math.pow(arg.evaluate(), 2)};
+}
+
+@enduml
