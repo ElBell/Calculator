@@ -14,7 +14,6 @@ public class Inverse implements Calculations {
         {
             return 1 / left.evaluate();
 
-
         }
     }
 
