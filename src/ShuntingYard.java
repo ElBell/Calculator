@@ -20,6 +20,15 @@ public class ShuntingYard {
         put("/", Operator.DIVIDE);
     }};
 
+    private static Set<String> validFunctions = new HashSet<String>() {{
+        add("exponent");
+        add("factorial");
+        add("inversenumber");
+        add("square");
+        add("squareroot");
+        add("switchsign");
+    }};
+
     private static boolean isHigerPrec(String op, String sub) {
         return (ops.containsKey(sub) && ops.get(sub).precedence >= ops.get(op).precedence);
     }
@@ -31,7 +40,8 @@ public class ShuntingYard {
         for (String token : infix) {
             // operator
             if (ops.containsKey(token)) {
-                while (!stack.isEmpty() && isHigerPrec(token, stack.peek()))
+                while (!stack.isEmpty() && (
+                        validFunctions.contains(stack.peek()) || isHigerPrec(token, stack.peek())))
                     output.add(stack.pop());
                 stack.push(token);
 
@@ -46,6 +56,8 @@ public class ShuntingYard {
                 stack.pop();
 
                 // digit
+            } else if (validFunctions.contains(token)) {
+                stack.push(token);
             } else {
                 output.add(token);
             }

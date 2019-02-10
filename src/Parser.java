@@ -1,3 +1,5 @@
+import calculations.*;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,8 +11,8 @@ public class Parser {
     public Calculations parse(String rawInput){
         List<String> brokenInput = breakIntoArray(rawInput);
         List<String> sortedInput = sortByOperation(brokenInput);
-        Calculations calculationTree = parseCalculations(sortedInput);
-        return null;//calculationTree;
+        Calculations calculationsTree = parseCalculationss(sortedInput);
+        return null;//calculationsTree;
     }
 
     public List<String> breakIntoArray(String toBreak){
@@ -41,49 +43,53 @@ public class Parser {
         return sorted;
     }
 
-    public Calculations parseCalculations(List<String> sortedList){
-        Stack<Calculations> calculationsTree = new Stack<Calculations>();
+    public Calculations parseCalculationss(List<String> sortedList){
+        Stack<Calculations> calculationssTree = new Stack<Calculations>();
         for(int i = 0;i < sortedList.size(); i++) {
             String current = sortedList.get(i);
             if(current.equals("+")) {
-                Calculation valueRight = calculationsTree.pop();
-                Calculation valueLeft = calculationsTree.pop();
-                Add calculation = new Add(valueLeft, valueRight);
-                calculationsTree.push(calculation);
+                Calculations valueRight = calculationssTree.pop();
+                Calculations valueLeft = calculationssTree.pop();
+                Add calculations = new Add(valueLeft, valueRight);
+                calculationssTree.push(calculations);
             }else if(current.equals("-")){
-                Calculation valueRight = calculationsTree.pop();
-                String next = sortedQueue.peek();
-                if(next.isEmpty() || !isNumeric(next)){calculationsTree.push();}
-                Calculation valueLeft = calculationsTree.pop();
-                Subtract calculation = new Subtract(valueLeft, valueRight);
-                calculationsTree.push(calculation);
+                Calculations valueRight = calculationssTree.pop();
+                String next = sortedList.get(i+1);
+                Calculations valueLeft;
+                if(next.isEmpty() || !isNumeric(next)){
+                    valueLeft = new Value(0);
+                } else {
+                    valueLeft = calculationssTree.pop();
+                }
+                Subtract calculations = new Subtract(valueLeft, valueRight);
+                calculationssTree.push(calculations);
             }else if(current.equals("*")){
-                Calculation valueRight = calculationsTree.pop();
-                Calculation valueLeft = calculationsTree.pop();
-                Multipy calculation = new Multipy(valueLeft, valueRight);
-                calculationsTree.push(calculation);
+                Calculations valueRight = calculationssTree.pop();
+                Calculations valueLeft = calculationssTree.pop();
+                Multiply calculations = new Multiply(valueLeft, valueRight);
+                calculationssTree.push(calculations);
             }else if(current.equals("/")){
-                Calculation valueRight = calculationsTree.pop();
-                Calculation valueLeft = calculationsTree.pop();
-                Divide calculation = new Divide(valueLeft, valueRight);
-                calculationsTree.push(calculation);
+                Calculations valueRight = calculationssTree.pop();
+                Calculations valueLeft = calculationssTree.pop();
+                Divide calculations = new Divide(valueLeft, valueRight);
+                calculationssTree.push(calculations);
             } else if(current.equals("square")) {
-                Calculation value = calculationsTree.pop();
-                Square calculation = new Square(value);
-                calculationsTree.push(calculation);
+                Calculations value = calculationssTree.pop();
+                Square calculations = new Square(value);
+                calculationssTree.push(calculations);
             } else if (current.equals("exponent")){
-                Calculation valueRight = calculationsTree.pop();
-                Calculation valueLeft = calculationsTree.pop();
-                Exponent calculation = new Exponent(valueLeft, valueRight);
-                calculationsTree.push(calculation);
+                Calculations valueRight = calculationssTree.pop();
+                Calculations valueLeft = calculationssTree.pop();
+                Exponent calculations = new Exponent(valueLeft, valueRight);
+                calculationssTree.push(calculations);
             } else if (current.equals("sqrt") || current.equals("squareroot")){
-                Calculation value = calculationsTree.pop();
-                SquareRoot calculation = new SquareRoot(value);
-                calculationsTree.push(calculation);
+                Calculations value = calculationssTree.pop();
+                SquareRoot calculations = new SquareRoot(value);
+                calculationssTree.push(calculations);
             } else if(current.equals("switchsign") || current.equals("invert")){
-                Calculation value = calculationsTree.pop();
-                SwitchSign calculation = new SwitchSign(value);
-                calculationsTree.push(calculation);
+                Calculations value = calculationssTree.pop();
+                SwitchSign calculations = new SwitchSign(value);
+                calculationssTree.push(calculations);
             }
             else {
                 //Err
@@ -91,7 +97,7 @@ public class Parser {
             }
         }
         //while(tokens)
-        return calculationsTree.pop();
+        return calculationssTree.pop();
     }
     public static boolean isNumeric(String strNum) {
         try {
