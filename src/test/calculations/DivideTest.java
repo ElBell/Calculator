@@ -1,20 +1,23 @@
+package calculations;
+
+import calculations.Add;
 import calculations.Calculations;
-import calculations.Subtract;
+import calculations.Divide;
 import calculations.Value;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SubtractTest {
+public class DivideTest {
     @Test
-    public void testSubtract() {
+    public void testDivide() {
         // Given
         Calculations testValue1 = new Value(9);
         Calculations testValue2 = new Value(3);
         // When
-        Subtract testSubtract = new Subtract(testValue1, testValue2);
+        Divide testDivide = new Divide(testValue1, testValue2);
         // Then
-        float expectedResult = 6.0f;
-        float actualResult = testSubtract.evaluate();
+        float expectedResult = 3.0f;
+        float actualResult = testDivide.evaluate();
         Assert.assertEquals(expectedResult, actualResult, 0.0001);
     }
 }

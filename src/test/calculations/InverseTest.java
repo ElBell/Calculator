@@ -1,3 +1,5 @@
+package calculations;
+
 import calculations.Calculations;
 import calculations.Inverse;
 import calculations.Value;

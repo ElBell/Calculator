@@ -1,3 +1,5 @@
+package calculations;
+
 import calculations.Calculations;
 import calculations.Value;
 import org.junit.Assert;

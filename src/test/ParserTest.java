@@ -127,7 +127,7 @@ public class ParserTest {
         //When
         parser.generateExponent(testCalculationStack);
         //Then
-        Calculations expectedCalculations = new Exponent(new Value(5), new Value(2));
+        Calculations expectedCalculations = new Exponent(new Value(2), new Value(5));
         Float expectedAnswer = expectedCalculations.evaluate();
         Calculations actualCalculations = testCalculationStack.pop();
         Float actualAnswer = actualCalculations.evaluate();

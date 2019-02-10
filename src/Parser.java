@@ -26,9 +26,14 @@ public class Parser {
         Matcher tokenMatcher = tokenPattern.matcher(toBreak);
 
         List<String> brokenString = new ArrayList<>();
+        String previous = "";
         while (!tokenMatcher.hitEnd()) {
             if (tokenMatcher.find()) {
                 String result = tokenMatcher.group();
+                if((previous.equals(")") && result.equals("("))|| (previous.equals(")") && isNumeric(result)) || (isNumeric(previous) && result.equals("("))) {
+                    brokenString.add("*");
+                }
+                previous = result;
                 brokenString.add(result);
             } else {
                 break;
@@ -217,8 +222,9 @@ public class Parser {
         Calculations valueRight = calculationsStack.pop();
         Calculations valueLeft = new Value(0);
         if (calculationsStack.size() != 0) {
-            //if(isNumeric(Float.toString(calculationsStack.peek().evaluate()))){
+            if((calculationsStack.peek() instanceof Calculations)) {
                 valueLeft = calculationsStack.pop();
+            }
         }
         Subtract calculations = new Subtract(valueLeft, valueRight);
         calculationsStack.push(calculations);

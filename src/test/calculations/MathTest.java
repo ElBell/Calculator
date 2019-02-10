@@ -1,3 +1,5 @@
+package calculations;
+
 import calculations.*;
 import org.junit.Test;
 

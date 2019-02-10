@@ -57,36 +57,6 @@ public class CalculatorDisplay extends JFrame {
         //TODO Error: Number too big, NaN, etc (notably inverseSine, inverseCosine, inverseTanget)
         inputWindow.setText(String.format("%.2f", new BigDecimal(answer)));
     }
-    /**
-    public String decideNextDisplayMode() {
-        if (currentDisplayMode == "Binary") {
-            currentDisplayMode = "Octal";
-        } else if (currentDisplayMode == "Octal") {
-            currentDisplayMode = "Decimal";
-        } else if (currentDisplayMode == "Hexidecimal") {
-            currentDisplayMode = "Binary";
-        }
-        return switchDisplayMode(currentDisplayMode);
-    }
-    /**
-    public String switchDisplayMode(String input) {
-        //TODO Error value other than binary, octal, decimal, or hexidecimal
-        //TODO Error value other than a number is on the screen
-        input = input.toLowerCase();
-        String out;
-        float floatInput = Float.parseFloat(input);
-        if (input == "binary"){
-            out = Integer.toString(Float.floatToRawIntBits(floatInput));
-        } else if (input == "octal"){
-             out = Integer.toOctalString(Integer.parseInt(input));
-        } else if (input == "decimal") {
-            out =
-        } else if (input == "hexidecimal"){
-            out = Float.toHexString(floatInput);
-        }
-        return out;
-    }
-     **/
 
 
     public CalculatorDisplay() {
@@ -125,16 +95,16 @@ public class CalculatorDisplay extends JFrame {
             }
         });
 
-        /**
+
         switchDisplayMode = new JButton("SwitchDisplayMode");
         buttonpanel.add(switchDisplayMode);
         switchDisplayMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent f) {
-                inputWindow.append(decideNextDisplayMode());
+                //inputWindow.append(switchedMode());
             }
         });
-        **/
+
 
         memoryStore = new JButton("MemoryStore");
         buttonpanel.add(memoryStore);

@@ -6,7 +6,6 @@ public class InverseNaturalLogarithm implements Calculations{
         this.left = left;
     }
     public float evaluate() {
-        float value = (float) Math.pow(Math.E, Math.log(left.evaluate()));
-        return value;
+        return (float) Math.pow(Math.E, left.evaluate());
     }
 }
