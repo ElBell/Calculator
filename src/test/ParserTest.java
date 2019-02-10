@@ -1,4 +1,6 @@
 import calculations.*;
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.DisplayMode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -257,6 +259,7 @@ public class ParserTest {
         Assert.assertEquals(expectedAnswer, actualAnswer);
     }
 
+    /*
     @Test
     public void testGenerateSubtractNone() {
         // Given
@@ -270,7 +273,7 @@ public class ParserTest {
         Calculations actualCalculations = testCalculationStack.pop();
         Float actualAnswer = actualCalculations.evaluate();
         Assert.assertEquals(expectedAnswer, actualAnswer);
-    }
+    }*/
 
     @Test
     public void testIsNumericTrue() {
@@ -326,6 +329,42 @@ public class ParserTest {
         //Then
         Calculations expectedCalculations = new Square(new Add(new Add(new Value(5), new Square(new Value(3))), new Value(6)));
         Float expectedAnswer = expectedCalculations.evaluate();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testHex() {
+        CalculatorOptions.getInstance().setDisplayMode(DisplayMode.HEXADECIMAL);
+        // Given
+        String hexCalculation = "A+1";
+        // When
+        Parser parse = new Parser();
+        List<String> testList = parse.breakIntoArray(hexCalculation);
+        List<String> sortedInput = parse.sortByOperation(testList);
+        Calculations actualCalculations = parser.parseCalculations(sortedInput);
+
+        //Then;
+        Float expectedAnswer = 11f;
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testSubtractParsing() {
+        CalculatorOptions.getInstance().setDisplayMode(DisplayMode.DECIMAL);
+        // Given
+        String hexCalculation = "5-4";
+        // When
+        Parser parse = new Parser();
+        List<String> testList = parse.breakIntoArray(hexCalculation);
+        System.out.println(testList);
+        List<String> sortedInput = parse.sortByOperation(testList);
+        System.out.println(sortedInput);
+        Calculations actualCalculations = parser.parseCalculations(sortedInput);
+
+        //Then;
+        Float expectedAnswer = 1f;
         Float actualAnswer = actualCalculations.evaluate();
         Assert.assertEquals(expectedAnswer, actualAnswer);
     }

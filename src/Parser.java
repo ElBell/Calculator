@@ -17,8 +17,8 @@ public class Parser {
 
     public List<String> breakIntoArray(String toBreak){
         toBreak = toBreak.replaceAll("\\s+","").toLowerCase();
-        String OPERATORS = "([\\(\\)+*/-\\^])";
-        String NUMBERS = "(\\d+(\\.\\d+)?)";
+        String OPERATORS = "([\\(\\)+*/\\-\\^])";
+        String NUMBERS = "([\\dacbdef]+(\\.\\d+)?)";
         String LETTERS = "([a-z]+)";
         String REGEX = NUMBERS+"|"+OPERATORS+"|"+LETTERS;
         Pattern tokenPattern = Pattern.compile(REGEX);
@@ -243,7 +243,7 @@ public class Parser {
         Calculations valueRight = calculationsStack.pop();
         Calculations valueLeft = new Value("0");
         if (calculationsStack.size() != 0) {
-                valueLeft = calculationsStack.pop();
+            valueLeft = calculationsStack.pop();
         }
         Subtract calculations = new Subtract(valueLeft, valueRight);
         calculationsStack.push(calculations);
@@ -261,7 +261,7 @@ public class Parser {
         try {
             float trialFloat = Float.parseFloat(strNum);
         } catch (NumberFormatException | NullPointerException nfe) {
-            return false;
+            return strNum.matches("-?[0-9a-fA-F]+");
         }
         return true;
     }

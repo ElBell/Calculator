@@ -7,14 +7,16 @@ public enum DisplayMode {
     public float convertFromMode(String number) {
         switch (this) {
             case HEXADECIMAL:
-                Long hexNumber = Long.parseLong(number, 16);
-                return Float.intBitsToFloat(hexNumber.intValue());
+                Integer hexNumber = Integer.parseInt(number, 16);
+                return (float)hexNumber;
             case BINARY:
-                Long binaryNumber = Long.parseLong(number, 2);
-                return Float.intBitsToFloat(binaryNumber.intValue());
+                //Long binaryNumber = Long.parseLong(number, 2);
+                //return Float.intBitsToFloat(binaryNumber.intValue());
+                Integer binaryNumber = Integer.parseInt(number, 2);
+                return (float)(binaryNumber);
             case OCTAL:
-                Long octalNumber = Long.parseLong(number, 8);
-                return Float.intBitsToFloat(octalNumber.intValue());
+                Integer octalNumber = Integer.parseInt(number, 8);
+                return (float)octalNumber;
             case DECIMAL:
             default:
                 return Float.parseFloat(number);
@@ -24,13 +26,11 @@ public enum DisplayMode {
     public String convertToMode(float number) {
         switch (this) {
             case HEXADECIMAL:
-                return Float.toHexString(number);
+                return Integer.toHexString((int)number);
             case BINARY:
-                long bits = Double.doubleToLongBits(number);
-                return Long.toBinaryString(bits);
+                return Integer.toBinaryString((int)number);
             case OCTAL:
-                long octalBits = Double.doubleToLongBits(number);
-                return Long.toOctalString(octalBits);
+                return Integer.toOctalString((int)number);
             case DECIMAL:
             default:
                 return Float.toString(number);

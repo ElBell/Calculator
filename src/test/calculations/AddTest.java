@@ -3,6 +3,8 @@ package calculations;
 import calculations.Add;
 import calculations.Calculations;
 import calculations.Value;
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.DisplayMode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,10 +15,10 @@ public class AddTest {
         Calculations testValue1 = new Value("5");
         Calculations testValue2 = new Value("3");
         // When
-        Add testDivide = new Add(testValue1, testValue2);
+        Add testAdd = new Add(testValue1, testValue2);
         // Then
         float expectedResult = 8.0f;
-        float actualResult = testDivide.evaluate();
+        float actualResult = testAdd.evaluate();
         Assert.assertEquals(expectedResult, actualResult, 0.0001);
     }
 
@@ -26,10 +28,10 @@ public class AddTest {
         Calculations testValue1 = new Value(-5);
         Calculations testValue2 = new Value(3);
         // When
-        Add testDivide = new Add(testValue1, testValue2);
+        Add testAdd1 = new Add(testValue1, testValue2);
         // Then
         float expectedResult = -2.0f;
-        float actualResult = testDivide.evaluate();
+        float actualResult = testAdd1.evaluate();
         Assert.assertEquals(expectedResult, actualResult, 0.0001);
     }
 
@@ -39,10 +41,26 @@ public class AddTest {
         Calculations testValue1 = new Value(-5);
         Calculations testValue2 = new Value(-3);
         // When
-        Add testDivide = new Add(testValue1, testValue2);
+        Add testAdd2 = new Add(testValue1, testValue2);
         // Then
         float expectedResult = -8.0f;
-        float actualResult = testDivide.evaluate();
+        float actualResult = testAdd2.evaluate();
         Assert.assertEquals(expectedResult, actualResult, 0.0001);
+    }
+
+    @Test
+    public void testAddBinary() {
+        // Given
+        CalculatorOptions mode = CalculatorOptions.getInstance();
+        mode.setDisplayMode(DisplayMode.BINARY);
+        Calculations testValue1 = new Value("1");
+        Calculations testValue2 = new Value("10");
+        // When
+        Add testAddBinary = new Add(testValue1, testValue2);
+        // Then
+        float expectedResult = 3f;
+        float actualResult = testAddBinary.evaluate();
+        Assert.assertEquals(expectedResult, actualResult, 0.0001);
+        mode.setDisplayMode(DisplayMode.DECIMAL);
     }
 }
