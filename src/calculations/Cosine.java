@@ -5,7 +5,6 @@ public class Cosine implements Calculations{
     public Cosine(Calculations left) {
         this.left = left;
     }
-    public float evaluate() {
-        return (float) Math.cos(left.evaluate());
+    public float evaluate() {return (float) Math.cos(Math.toRadians(left.evaluate()));
     }
 }
