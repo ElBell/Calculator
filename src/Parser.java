@@ -222,9 +222,7 @@ public class Parser {
         Calculations valueRight = calculationsStack.pop();
         Calculations valueLeft = new Value(0);
         if (calculationsStack.size() != 0) {
-            if((calculationsStack.peek() instanceof Calculations)) {
                 valueLeft = calculationsStack.pop();
-            }
         }
         Subtract calculations = new Subtract(valueLeft, valueRight);
         calculationsStack.push(calculations);
