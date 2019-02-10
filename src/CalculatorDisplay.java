@@ -22,6 +22,7 @@ public class CalculatorDisplay extends JFrame {
      * @param args the command line arguments
      */
     String memory = "Memory Currently Empty";
+    String lastInput = "";
 
     String[] buttonLabels = {"  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  ", "  8  ", "  9  ",
                             "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "  ^  ", "Square", "SquareRoot", "Factorial",
@@ -53,6 +54,7 @@ public class CalculatorDisplay extends JFrame {
     }
 
     public void doCalculation() {
+        lastInput = inputWindow.getText();
         Calculations calculations = parser.parse(inputWindow.getText());
         Float answer = calculations.evaluate();
         try {
@@ -179,6 +181,18 @@ public class CalculatorDisplay extends JFrame {
             public void keyTyped(KeyEvent e) { /* ... */ }
         });
 
+        inputWindow.addKeyListener(new KeyListener(){
+            @Override
+            public void keyPressed(KeyEvent event){
+                if(event.getKeyCode() == KeyEvent.VK_DOWN){
+                    inputWindow.setText("");
+                    inputWindow.setText(lastInput);
+                }
+            }
+            public void keyReleased(KeyEvent e) { /* ... */ }
+
+            public void keyTyped(KeyEvent e) { /* ... */ }
+        });
 
     }
 }
