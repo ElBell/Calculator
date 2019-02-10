@@ -27,7 +27,7 @@ public class CalculatorDisplay extends JFrame {
                             "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "Exponent", "Square", "SquareRoot", "Factorial",
                             "Inverse", "Sine", "Cosine", "Tangent", "InverseSine", "InverseCosine", "InverseTangent",
                             "Logarithm", "Inverselogarithm", "NaturalLogarithm",  "InverseNaturalLogarithm" ,
-                            "  .  ", "  ,  ", "  (  ", "  )  "};
+                            "  .  ", "  ,  ", "XOR","  (  ", ")"};
     private JButton[] jButtons;
     private JButton equals;
     private JButton clear;
@@ -55,9 +55,15 @@ public class CalculatorDisplay extends JFrame {
     public void doCalculation() {
         Calculations calculations = parser.parse(inputWindow.getText());
         Float answer = calculations.evaluate();
-        DisplayMode mode = CalculatorOptions.getInstance().getDisplayMode();
-        //TODO Error: Number too big, NaN, etc (notably inverseSine, inverseCosine, inverseTanget)
-        inputWindow.setText(mode.convertToMode(answer));
+        try {
+            DisplayMode mode = CalculatorOptions.getInstance().getDisplayMode();
+            //TODO Error: Number too big, NaN, etc (notably inverseSine, inverseCosine, inverseTanget)
+            inputWindow.setText(mode.convertToMode(answer));
+        }
+        catch (Exception e) {
+
+            System.err.println("Error - INVALID MATH");
+        };
     }
 
 
@@ -158,6 +164,8 @@ public class CalculatorDisplay extends JFrame {
                 doCalculation();
             }
         });
+
+
 
         inputWindow.addKeyListener(new KeyListener(){
             @Override
