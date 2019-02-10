@@ -7,7 +7,7 @@ public class SineTest {
     @Test
     public void testSineTest() {
         // Given
-        Calculations testValue1 = new Value(8);
+        Calculations testValue1 = new Value("8");
         // When
         Sine testSine = new Sine(testValue1);
         // Then

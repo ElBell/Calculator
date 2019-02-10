@@ -27,6 +27,7 @@ public class ShuntingYard {
         add("exponent");
         add("factorial");
         add("inverse");
+        add("xor");
         add("square");
         add("squareroot");
         add("switchsign");

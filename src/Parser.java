@@ -50,6 +50,7 @@ public class Parser {
 
     public static Calculations parseCalculations(List<String> sortedList){
         Stack<Calculations> calculationsStack = new Stack<Calculations>();
+        try{ // Catch generic math issues
         for(int i = 0;i < sortedList.size(); i++) {
             String current = sortedList.get(i);
             if (current.equals("+")) {
@@ -60,44 +61,57 @@ public class Parser {
                 generateMultiply(calculationsStack);
             } else if (current.equals("/")) {
                 generateDivide(calculationsStack);
+            }else if (current.equals("xor")) { // XOR
+                generateXOR(calculationsStack);
             } else if (current.equals("square")) {
                 generateSquare(calculationsStack);
             } else if (current.equals("^") || current.equals("exponent")) {
                 generateExponent(calculationsStack);
-            } else if (current.equals("sqrt") || current.equals("squareroot")){
+            } else if (current.equals("sqrt") || current.equals("squareroot")) {
                 generateSquareRoot(calculationsStack);
-            } else if(current.equals("switchsign") || current.equals("invert")){
+            } else if (current.equals("switchsign") || current.equals("invert")) {
                 generateSwitchSign(calculationsStack);
-            } else if(current.equals("factorial")){
+            } else if (current.equals("factorial")) {
                 generateFactorial(calculationsStack);
-            } else if(current.equals("inverse")){
+            } else if (current.equals("inverse")) {
                 generateInverse(calculationsStack);
-            } else if(current.equals("sine") || current.equals("sin")){
+            } else if (current.equals("sine") || current.equals("sin")) {
                 generateSine(calculationsStack);
-            } else if(current.equals("cosine") || current.equals("cos")){
+            } else if (current.equals("cosine") || current.equals("cos")) {
                 generateCosine(calculationsStack);
-            } else if(current.equals("tangent") || current.equals("tan")){
+            } else if (current.equals("tangent") || current.equals("tan")) {
                 generateTangent(calculationsStack);
-            } else if(current.equals("inversesine") || current.equals("inversesin")){
+            } else if (current.equals("inversesine") || current.equals("inversesin")) {
                 generateInverseSine(calculationsStack);
-            } else if(current.equals("inversecosine") || current.equals("inversecos")){
+            } else if (current.equals("inversecosine") || current.equals("inversecos")) {
                 generateInverseCosine(calculationsStack);
-            } else if(current.equals("inversetangent") || current.equals("inversetan")){
+            } else if (current.equals("inversetangent") || current.equals("inversetan")) {
                 generateInverseTangent(calculationsStack);
-            } else if (current.equals("logarithm") || current.equals("log")){
+            } else if (current.equals("logarithm") || current.equals("log")) {
                 generateLogarithm(calculationsStack);
-            } else if(current.equals("inverselogarithm") || current.equals("inverslog")){
-            generateInverseLogarithm(calculationsStack);
-            } else if(current.equals("naturallogarithm") || current.equals("naturallog")){
-            generateNaturalLogarithm(calculationsStack);
-            } else if (current.equals("inversenaturallogarithm") || current.equals("inversenaturallog")){
-            generateInverseNaturalLogarithm(calculationsStack);
-            } else if(isNumeric(current)) {
+            } else if (current.equals("inverselogarithm") || current.equals("inverslog")) {
+                generateInverseLogarithm(calculationsStack);
+            } else if (current.equals("naturallogarithm") || current.equals("naturallog")) {
+                generateNaturalLogarithm(calculationsStack);
+            } else if (current.equals("inversenaturallogarithm") || current.equals("inversenaturallog")) {
+                generateInverseNaturalLogarithm(calculationsStack);
+            } else if (isNumeric(current)) {
                 generateValue(calculationsStack, current);
             } else {
                 //TODO Error: unknownEntry
             }
+        } // end loop
+        }// end try
+
+        catch(EmptyStackException ex)
+        {
+            System.err.println("Unknown math: EmptyStackException error thrown");
         }
+        catch(Exception ex)
+        {
+            System.err.println("Unknown math error");
+        }
+
         //while(tokens)
         return calculationsStack.pop();
     }
@@ -113,6 +127,8 @@ public class Parser {
         NaturalLogarithm calculations = new NaturalLogarithm(value);
         calculationsStack.push(calculations);
     }
+
+
 
     public static void generateInverseLogarithm(Stack<Calculations> calculationsStack) {
         Calculations value = calculationsStack.pop();
@@ -161,8 +177,7 @@ public class Parser {
     }
 
     public static void generateValue(Stack<Calculations> calculationsStack, String current) {
-        Float value = Float.parseFloat(current);
-        Value calculations = new Value(value);
+        Value calculations = new Value(current);
         calculationsStack.push(calculations);
     }
 
@@ -197,6 +212,13 @@ public class Parser {
         calculationsStack.push(calculations);
     }
 
+    public static void generateXOR(Stack<Calculations> calculationsStack) {
+        Calculations valueLeft= calculationsStack.pop();
+        Calculations valueRight = calculationsStack.pop();
+        Xor calculations = new Xor(valueLeft, valueRight);
+        calculationsStack.push(calculations);
+    }
+
     public static void generateSquare(Stack<Calculations> calculationsStack) {
         Calculations value = calculationsStack.pop();
         Square calculations = new Square(value);
@@ -219,7 +241,7 @@ public class Parser {
 
     public static void generateSubtract(Stack<Calculations> calculationsStack) {
         Calculations valueRight = calculationsStack.pop();
-        Calculations valueLeft = new Value(0);
+        Calculations valueLeft = new Value("0");
         if (calculationsStack.size() != 0) {
                 valueLeft = calculationsStack.pop();
         }

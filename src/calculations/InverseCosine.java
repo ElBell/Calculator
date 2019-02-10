@@ -8,6 +8,6 @@ public class InverseCosine implements Calculations {
         this.left = left;
     }
     public float evaluate() {
-        return (float) toRadians(Math.acos(left.evaluate()));
+        return (float) Math.acos(left.evaluate());
     }
 }

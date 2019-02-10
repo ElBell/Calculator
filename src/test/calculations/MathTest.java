@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("all")
 public class MathTest {
-    Calculations small = new Value(3);
-    Calculations med = new Value(9);
+    Calculations small = new Value("3");
+    Calculations med = new Value("9");
 
     Square square = new Square(small);
     SquareRoot squareRoot = new SquareRoot(med);

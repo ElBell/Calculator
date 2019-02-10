@@ -10,8 +10,8 @@ public class SubtractTest {
     @Test
     public void testSubtract() {
         // Given
-        Calculations testValue1 = new Value(9);
-        Calculations testValue2 = new Value(3);
+        Calculations testValue1 = new Value("9");
+        Calculations testValue2 = new Value("3");
         // When
         Subtract testSubtract = new Subtract(testValue1, testValue2);
         // Then

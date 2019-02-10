@@ -7,7 +7,7 @@ public class LogarithmTest {
     @Test
     public void testLogarithm() {
         // Given
-        Calculations testValue1 = new Value(8);
+        Calculations testValue1 = new Value("8");
         // When
         Logarithm testLogarithm = new Logarithm(testValue1);
         // Then

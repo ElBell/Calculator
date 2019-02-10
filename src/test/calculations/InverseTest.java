@@ -10,7 +10,7 @@ public class InverseTest {
     @Test
     public void testInverse() {
         // Given
-        Calculations testValue1 = new Value(10);
+        Calculations testValue1 = new Value("10");
         // When
         Inverse testInverse = new Inverse(testValue1);
         // Then
