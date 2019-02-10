@@ -48,19 +48,21 @@ public class Parser {
         Stack<Calculations> calculationsStack = new Stack<Calculations>();
         for(int i = 0;i < sortedList.size(); i++) {
             String current = sortedList.get(i);
-            if(current.equals("+")) {
+            if (current.equals("+")) {
                 generateAdd(calculationsStack);
-            }else if(current.equals("-")){
+            } else if (current.equals("-")) {
                 String next = "";
-                if(i + 1 != sortedList.size()){ next = sortedList.get(i+1);}
+                if (i + 1 != sortedList.size()) {
+                    next = sortedList.get(i + 1);
+                }
                 generateSubtract(calculationsStack, next);
-            }else if(current.equals("*")){
+            } else if (current.equals("*")) {
                 generateMultiply(calculationsStack);
-            }else if(current.equals("/")){
+            } else if (current.equals("/")) {
                 generateDivide(calculationsStack);
-            } else if(current.equals("square")) {
+            } else if (current.equals("square")) {
                 generateSquare(calculationsStack);
-            } else if (current.equals("exponent")){
+            } else if (current.equals("^")) {
                 generateExponent(calculationsStack);
             } else if (current.equals("sqrt") || current.equals("squareroot")){
                 generateSquareRoot(calculationsStack);
@@ -70,12 +72,91 @@ public class Parser {
                 generateFactorial(calculationsStack);
             } else if(current.equals("inverse")){
                 generateInverse(calculationsStack);
-            } else if(isNumeric(current)) {
+            } else if(current.equals("sine") || current.equals("sin")){
+                generateSine(calculationsStack);
+            } else if(current.equals("cosine") || current.equals("cos")){
+                generateCosine(calculationsStack);
+            } else if(current.equals("tangent") || current.equals("tan")){
+                generateTangent(calculationsStack);
+            } else if(current.equals("inversesine") || current.equals("inversesin")){
+                generateInverseSine(calculationsStack);
+            } else if(current.equals("inversecosine") || current.equals("inversecos")){
+                generateInverseCosine(calculationsStack);
+            } else if(current.equals("inversetangent") || current.equals("inversetan")){
+                generateInverseTangent(calculationsStack);
+            } else if (current.equals("logarithm") || current.equals("log")){
+                generateLogarithm(calculationsStack);
+            } else if(current.equals("inverselogarithm") || current.equals("inverslog")){
+            generateInverseLogarithm(calculationsStack);
+            } else if(current.equals("naturallogarithm") || current.equals("naturallog")){
+            generateNaturalLogarithm(calculationsStack);
+            } else if (current.equals("inversenaturallogarithm") || current.equals("inversenaturallog")){
+            generateInverseNaturalLogarithm(calculationsStack);
+            }
+                else if(isNumeric(current)) {
                 generateValue(calculationsStack, current);
             }
         }
         //while(tokens)
         return calculationsStack.pop();
+    }
+
+    public static void generateInverseNaturalLogarithm(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        InverseNaturalLogarithm calculations = new InverseNaturalLogarithm(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateNaturalLogarithm(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        NaturalLogarithm calculations = new NaturalLogarithm(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateInverseLogarithm(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        InverseLogarithm calculations = new InverseLogarithm(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateLogarithm(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        Logarithm calculations = new Logarithm(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateInverseSine(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        InverseSine calculations = new InverseSine(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateInverseCosine(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        InverseCosine calculations = new InverseCosine(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateInverseTangent(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        InverseTangent calculations = new InverseTangent(value);
+        calculationsStack.push(calculations);
+    }
+
+    public static void generateCosine(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        Cosine calculations = new Cosine(value);
+        calculationsStack.push(calculations);
+    }
+    public static void generateTangent(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        Tangent calculations = new Tangent(value);
+        calculationsStack.push(calculations);
+    }
+    public static void generateSine(Stack<Calculations> calculationsStack) {
+        Calculations value = calculationsStack.pop();
+        Sine calculations = new Sine(value);
+        calculationsStack.push(calculations);
     }
 
     public static void generateValue(Stack<Calculations> calculationsStack, String current) {
@@ -109,8 +190,8 @@ public class Parser {
     }
 
     public static void generateExponent(Stack<Calculations> calculationsStack) {
-        Calculations valueRight = calculationsStack.pop();
         Calculations valueLeft = calculationsStack.pop();
+        Calculations valueRight = calculationsStack.pop();
         Exponent calculations = new Exponent(valueLeft, valueRight);
         calculationsStack.push(calculations);
     }
