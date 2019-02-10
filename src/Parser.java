@@ -51,18 +51,14 @@ public class Parser {
             if (current.equals("+")) {
                 generateAdd(calculationsStack);
             } else if (current.equals("-")) {
-                String next = "";
-                if (i + 1 != sortedList.size()) {
-                    next = sortedList.get(i + 1);
-                }
-                generateSubtract(calculationsStack, next);
+                generateSubtract(calculationsStack);
             } else if (current.equals("*")) {
                 generateMultiply(calculationsStack);
             } else if (current.equals("/")) {
                 generateDivide(calculationsStack);
             } else if (current.equals("square")) {
                 generateSquare(calculationsStack);
-            } else if (current.equals("^")) {
+            } else if (current.equals("^") || current.equals("exponent")) {
                 generateExponent(calculationsStack);
             } else if (current.equals("sqrt") || current.equals("squareroot")){
                 generateSquareRoot(calculationsStack);
@@ -92,9 +88,10 @@ public class Parser {
             generateNaturalLogarithm(calculationsStack);
             } else if (current.equals("inversenaturallogarithm") || current.equals("inversenaturallog")){
             generateInverseNaturalLogarithm(calculationsStack);
-            }
-                else if(isNumeric(current)) {
+            } else if(isNumeric(current)) {
                 generateValue(calculationsStack, current);
+            } else {
+                //TODO Error: unknownEntry
             }
         }
         //while(tokens)
@@ -216,13 +213,12 @@ public class Parser {
         calculationsStack.push(calculations);
     }
 
-    public static void generateSubtract(Stack<Calculations> calculationsStack, String next) {
+    public static void generateSubtract(Stack<Calculations> calculationsStack) {
         Calculations valueRight = calculationsStack.pop();
-        Calculations valueLeft;
-        if(next.isEmpty() || !isNumeric(next)){
-            valueLeft = new Value(0);
-        } else {
-            valueLeft = calculationsStack.pop();
+        Calculations valueLeft = new Value(0);
+        if (calculationsStack.size() != 0) {
+            //if(isNumeric(Float.toString(calculationsStack.peek().evaluate()))){
+                valueLeft = calculationsStack.pop();
         }
         Subtract calculations = new Subtract(valueLeft, valueRight);
         calculationsStack.push(calculations);
@@ -244,6 +240,5 @@ public class Parser {
         }
         return true;
     }
-
 
 }

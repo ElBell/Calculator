@@ -7,7 +7,7 @@ import java.util.*;
 public class ShuntingYard {
 
     private enum Operator {
-        ADD(1), SUBTRACT(2), MULTIPLY(3), DIVIDE(4), EXPONENT(4);
+        ADD(1), SUBTRACT(2), MULTIPLY(3), DIVIDE(4);//, EXPONENT(5);
         final int precedence;
 
         Operator(int p) {
@@ -20,10 +20,12 @@ public class ShuntingYard {
         put("-", Operator.SUBTRACT);
         put("*", Operator.MULTIPLY);
         put("/", Operator.DIVIDE);
-        put("^", Operator.EXPONENT);
+        //put("^", Operator.EXPONENT);
     }};
 
     private static Set<String> validFunctions = new HashSet<String>() {{
+        add("exponent");
+        add("^");
         add("factorial");
         add("inverse");
         add("square");

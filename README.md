@@ -54,10 +54,10 @@
 - Trig functions
   - Sine - Calculate the sine of the displayed value and display it
   - Cosine - Calculate the cosine of the displayed value and display it
-  - Tangent - Calculate the tangent of the displayed value and display it
+  - calculations.Sine.Tangent - Calculate the tangent of the displayed value and display it
   - Inverse Sine
   - Inverse Cosine
-  - Inverse Tangent
+  - Inverse calculations.Sine.Tangent
 - Switch trig units mode (Degrees, Radians)
   - `switchUnitsMode()` should rotate through the options
   - `switchUnitsMode(String mode)` should set the trig units to the type given

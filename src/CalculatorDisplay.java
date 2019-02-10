@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.swing.*;
 
 public class CalculatorDisplay extends JFrame {
@@ -19,28 +20,25 @@ public class CalculatorDisplay extends JFrame {
      * @param args the command line arguments
      */
     String memory = "Memory Currently Empty";
+    String currentDisplayMode = "Float";
 
     String[] buttonLabels = {"  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  ", "  8  ", "  9  ",
-                            "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "^", "Square", "SquareRoot", "Factorial",
+                            "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "Exponent", "Square", "SquareRoot", "Factorial",
                             "Inverse", "Sine", "Cosine", "Tangent", "InverseSine", "InverseCosine", "InverseTangent",
                             "Logarithm", "Inverselogarithm", "NaturalLogarithm",  "InverseNaturalLogarithm" ,
                             "  .  ", "  ,  ", "  (  ", ")"};
-    JButton[] jButtons;
-    JButton equals;
-    JButton clear;
-    JButton switchSign;
-    JButton switchDisplayMode;
-    JButton memoryStore;
-    JButton memoryClear;
-    JButton memoryRecall;
-
-    public JButton getClear() {
-        return clear;
-    }
+    private JButton[] jButtons;
+    private JButton equals;
+    private JButton clear;
+    private JButton switchSign;
+    private JButton switchDisplayMode;
+    private JButton memoryStore;
+    private JButton memoryClear;
+    private JButton memoryRecall;
 
     String value;
     char operator;
-    JTextArea inputWindow = new JTextArea(1, 1);
+    JTextArea inputWindow = new JTextArea(3, 1);
     //JLabel historyWindow = new JLabel();
     Parser parser = new Parser();
 
@@ -56,8 +54,40 @@ public class CalculatorDisplay extends JFrame {
     public void doCalculation() {
         Calculations calculations = parser.parse(inputWindow.getText());
         Float answer = calculations.evaluate();
+        //TODO Error: Number too big, NaN, etc (notably inverseSine, inverseCosine, inverseTanget)
         inputWindow.setText(String.format("%.2f", new BigDecimal(answer)));
     }
+    /**
+    public String decideNextDisplayMode() {
+        if (currentDisplayMode == "Binary") {
+            currentDisplayMode = "Octal";
+        } else if (currentDisplayMode == "Octal") {
+            currentDisplayMode = "Decimal";
+        } else if (currentDisplayMode == "Hexidecimal") {
+            currentDisplayMode = "Binary";
+        }
+        return switchDisplayMode(currentDisplayMode);
+    }
+    /**
+    public String switchDisplayMode(String input) {
+        //TODO Error value other than binary, octal, decimal, or hexidecimal
+        //TODO Error value other than a number is on the screen
+        input = input.toLowerCase();
+        String out;
+        float floatInput = Float.parseFloat(input);
+        if (input == "binary"){
+            out = Integer.toString(Float.floatToRawIntBits(floatInput));
+        } else if (input == "octal"){
+             out = Integer.toOctalString(Integer.parseInt(input));
+        } else if (input == "decimal") {
+            out =
+        } else if (input == "hexidecimal"){
+            out = Float.toHexString(floatInput);
+        }
+        return out;
+    }
+     **/
+
 
     public CalculatorDisplay() {
         add(new JScrollPane(inputWindow), BorderLayout.NORTH);
@@ -95,15 +125,16 @@ public class CalculatorDisplay extends JFrame {
             }
         });
 
+        /**
         switchDisplayMode = new JButton("SwitchDisplayMode");
         buttonpanel.add(switchDisplayMode);
         switchDisplayMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent f) {
-                inputWindow.append("switchDisplayMode");
-                doCalculation();
+                inputWindow.append(decideNextDisplayMode());
             }
         });
+        **/
 
         memoryStore = new JButton("MemoryStore");
         buttonpanel.add(memoryStore);

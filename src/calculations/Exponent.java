@@ -10,9 +10,6 @@ public class Exponent implements Calculations {
         this.right = right;
     }
     public float evaluate() {
-        double tempDouble = Math.pow(left.evaluate(), right.evaluate());
-        float value = (float)tempDouble;
-
-        return value;
+        return (float) Math.pow(left.evaluate(), right.evaluate());
     }
 }

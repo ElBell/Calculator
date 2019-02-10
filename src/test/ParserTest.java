@@ -78,6 +78,17 @@ public class ParserTest {
 
     }
     @Test
+    public void testSortByOperation5() {
+        // Given
+        List<String> testList = Arrays.asList("2", "^", "2", "+", "5");
+        // When
+        List<String> actualList = parser.sortByOperation(testList);
+        // Then
+        List<String> expectedList = Arrays.asList("2", "2", "^", "5", "+");
+        Assert.assertEquals(expectedList, actualList);
+    }
+
+    @Test
     public void testGenerateSwitchSign() {
         // Given
         Stack<Calculations> testCalculationStack = new Stack<>();
@@ -237,7 +248,7 @@ public class ParserTest {
         testCalculationStack.add(new Value(10));
         testCalculationStack.add(new Value(2));
         //When
-        parser.generateSubtract(testCalculationStack, "10");
+        parser.generateSubtract(testCalculationStack);
         //Then
         Calculations expectedCalculations = new Subtract(new Value(10), new Value(2));
         Float expectedAnswer = expectedCalculations.evaluate();
@@ -252,7 +263,7 @@ public class ParserTest {
         Stack<Calculations> testCalculationStack = new Stack<>();
         testCalculationStack.add(new Value(10));
         //When
-        parser.generateSubtract(testCalculationStack, "");
+        parser.generateSubtract(testCalculationStack);
         //Then
         Calculations expectedCalculations = new Subtract(new Value(0), new Value(10));
         Float expectedAnswer = expectedCalculations.evaluate();
@@ -318,5 +329,6 @@ public class ParserTest {
         Float actualAnswer = actualCalculations.evaluate();
         Assert.assertEquals(expectedAnswer, actualAnswer);
     }
+
 
 }
