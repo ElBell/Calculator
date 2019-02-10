@@ -1,15 +1,20 @@
 import calculations.Add;
 import calculations.Calculations;
 import calculations.Value;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class AddTest {
     @Test
-    public void trialTest() {
+    public void testAdd() {
+        // Given
         Calculations testValue1 = new Value(5);
         Calculations testValue2 = new Value(3);
-        Add addTest = new Add(testValue1, testValue2);
-        float result = addTest.evaluate();
-        System.out.println(result);
+        // When
+        Add testDivide = new Add(testValue1, testValue2);
+        // Then
+        float expectedResult = 8.0f;
+        float actualResult = testDivide.evaluate();
+        Assert.assertEquals(expectedResult, actualResult, 0.0001);
     }
 }

@@ -51,7 +51,8 @@ public class Parser {
             if(current.equals("+")) {
                 generateAdd(calculationsStack);
             }else if(current.equals("-")){
-                String next = sortedList.get(i+1);
+                String next = "";
+                if(i + 1 != sortedList.size()){ next = sortedList.get(i+1);}
                 generateSubtract(calculationsStack, next);
             }else if(current.equals("*")){
                 generateMultiply(calculationsStack);

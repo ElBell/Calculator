@@ -231,6 +231,59 @@ public class ParserTest {
     }
 
     @Test
+    public void testGenerateSubtract() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(10));
+        testCalculationStack.add(new Value(2));
+        //When
+        parser.generateSubtract(testCalculationStack, "10");
+        //Then
+        Calculations expectedCalculations = new Subtract(new Value(10), new Value(2));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateSubtractNone() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(10));
+        //When
+        parser.generateSubtract(testCalculationStack, "");
+        //Then
+        Calculations expectedCalculations = new Subtract(new Value(0), new Value(10));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testIsNumericTrue() {
+        // Given
+        String string = "156664";
+        // When
+        boolean actualResult = parser.isNumeric(string);
+        // Then
+        boolean expectedResult = true;
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testIsNumericFalse() {
+        // Given
+        String string = "square";
+        // When
+        boolean actualResult = parser.isNumeric(string);
+        // Then
+        boolean expectedResult = false;
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void testParseCalculations() {
         // Given
         List<String> testList = new ArrayList<>();
@@ -241,6 +294,26 @@ public class ParserTest {
         Calculations actualCalculations = parser.parseCalculations(testList);
         //Then
         Calculations expectedCalculations = new Add(new Value(5), new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testParseCalculations2() {
+        // Given
+        List<String> testList = new ArrayList<>();
+        testList.add("5");
+        testList.add("3");
+        testList.add("square");
+        testList.add("+");
+        testList.add("6");
+        testList.add("+");
+        testList.add("square");
+        // When
+        Calculations actualCalculations = parser.parseCalculations(testList);
+        //Then
+        Calculations expectedCalculations = new Square(new Add(new Add(new Value(5), new Square(new Value(3))), new Value(6)));
         Float expectedAnswer = expectedCalculations.evaluate();
         Float actualAnswer = actualCalculations.evaluate();
         Assert.assertEquals(expectedAnswer, actualAnswer);
