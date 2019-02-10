@@ -12,7 +12,7 @@ public class InverseNumber implements Calculations {
 
     public float evaluate() {
         {
-            return left.evaluate() * (-1);
+            return 1 / left.evaluate();
 
 
         }
