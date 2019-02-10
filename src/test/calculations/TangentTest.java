@@ -5,14 +5,14 @@ import org.junit.Test;
 
 public class TangentTest {
     @Test
-    public void testLogarithm() {
+    public void testTangent() {
         // Given
         Calculations testValue1 = new Value(8);
         // When
-        Logarithm testLogarithm = new Logarithm(testValue1);
+        Tangent testTangent = new Tangent(testValue1);
         // Then
-        float expectedResult = 0.903089f;
-        float actualResult = testLogarithm.evaluate();
+        float expectedResult = -6.79971f;
+        float actualResult = testTangent.evaluate();
         Assert.assertEquals(expectedResult, actualResult, 0.01);
     }
 }
