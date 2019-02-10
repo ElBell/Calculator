@@ -11,8 +11,8 @@ public class ExponentTest {
     @Test
     public void testExponent() {
         // Given
-        Calculations testValue1 = new Value(3);
-        Calculations testValue2 = new Value(2);
+        Calculations testValue1 = new Value("3");
+        Calculations testValue2 = new Value("2");
         // When
         Exponent testExponent = new Exponent(testValue1, testValue2);
         // Then

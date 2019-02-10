@@ -1,5 +1,4 @@
 import calculations.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -162,8 +161,7 @@ public class Parser {
     }
 
     public static void generateValue(Stack<Calculations> calculationsStack, String current) {
-        Float value = Float.parseFloat(current);
-        Value calculations = new Value(value);
+        Value calculations = new Value(current);
         calculationsStack.push(calculations);
     }
 
@@ -220,11 +218,9 @@ public class Parser {
 
     public static void generateSubtract(Stack<Calculations> calculationsStack) {
         Calculations valueRight = calculationsStack.pop();
-        Calculations valueLeft = new Value(0);
+        Calculations valueLeft = new Value("0");
         if (calculationsStack.size() != 0) {
-            if((calculationsStack.peek() instanceof Calculations)) {
                 valueLeft = calculationsStack.pop();
-            }
         }
         Subtract calculations = new Subtract(valueLeft, valueRight);
         calculationsStack.push(calculations);

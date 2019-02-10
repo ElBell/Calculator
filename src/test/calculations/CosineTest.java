@@ -10,7 +10,7 @@ public class CosineTest {
     @Test
     public void testCosine() {
         // Given
-        Calculations testValue1 = new Value(9);
+        Calculations testValue1 = new Value("9");
         // When
         Cosine testCosine = new Cosine(testValue1);
         // Then

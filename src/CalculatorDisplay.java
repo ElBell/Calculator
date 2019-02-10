@@ -5,6 +5,8 @@
  */
 
 import calculations.Calculations;
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.DisplayMode;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,13 +22,12 @@ public class CalculatorDisplay extends JFrame {
      * @param args the command line arguments
      */
     String memory = "Memory Currently Empty";
-    String currentDisplayMode = "Float";
 
     String[] buttonLabels = {"  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  ", "  8  ", "  9  ",
                             "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "Exponent", "Square", "SquareRoot", "Factorial",
                             "Inverse", "Sine", "Cosine", "Tangent", "InverseSine", "InverseCosine", "InverseTangent",
                             "Logarithm", "Inverselogarithm", "NaturalLogarithm",  "InverseNaturalLogarithm" ,
-                            "  .  ", "  ,  ", "  (  ", ")"};
+                            "  .  ", "  ,  ", "  (  ", "  )  "};
     private JButton[] jButtons;
     private JButton equals;
     private JButton clear;
@@ -54,8 +55,9 @@ public class CalculatorDisplay extends JFrame {
     public void doCalculation() {
         Calculations calculations = parser.parse(inputWindow.getText());
         Float answer = calculations.evaluate();
+        DisplayMode mode = CalculatorOptions.getInstance().getDisplayMode();
         //TODO Error: Number too big, NaN, etc (notably inverseSine, inverseCosine, inverseTanget)
-        inputWindow.setText(String.format("%.2f", new BigDecimal(answer)));
+        inputWindow.setText(mode.convertToMode(answer));
     }
 
 
@@ -101,7 +103,10 @@ public class CalculatorDisplay extends JFrame {
         switchDisplayMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent f) {
-                //inputWindow.append(switchedMode());
+                CalculatorOptions mode = CalculatorOptions.getInstance();
+                mode.rotateMode();
+                inputWindow.setText("");
+                inputWindow.setText("Display mode is now: " + mode.getDisplayMode());
             }
         });
 

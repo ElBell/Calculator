@@ -7,7 +7,7 @@ public class NaturalLogarithmTest {
     @Test
     public void testNaturalLogarithm() {
         // Given
-        Calculations testValue1 = new Value(8);
+        Calculations testValue1 = new Value("8");
         // When
         NaturalLogarithm testNaturalLogarithm = new NaturalLogarithm(testValue1);
         // Then

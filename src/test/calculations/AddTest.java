@@ -10,8 +10,8 @@ public class AddTest {
     @Test
     public void testAdd() {
         // Given
-        Calculations testValue1 = new Value(5);
-        Calculations testValue2 = new Value(3);
+        Calculations testValue1 = new Value("5");
+        Calculations testValue2 = new Value("3");
         // When
         Add testDivide = new Add(testValue1, testValue2);
         // Then

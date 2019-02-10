@@ -7,7 +7,7 @@ public class InverseLogarithmTest {
     @Test
     public void testInverseLogarithm() {
         // Given
-        Calculations testValue1 = new Value(9);
+        Calculations testValue1 = new Value("9");
         // When
         InverseLogarithm testInverseLogarithmTest = new InverseLogarithm(testValue1);
         // Then

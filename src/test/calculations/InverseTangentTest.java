@@ -11,7 +11,7 @@ public class InverseTangentTest {
     @Test
     public void testInverseTangent() {
         // Given
-        Calculations testValue1 = new Value(45);
+        Calculations testValue1 = new Value("45");
         // When
         InverseTangent testInverseTangent = new InverseTangent(testValue1);
         // Then

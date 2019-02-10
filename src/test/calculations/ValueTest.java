@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public class ValueTest {
     @Test
-    public void testDivide() {
+    public void testValue() {
         // Given
-        float testValue1 = 9.0f;
+        String testValue1 = "9.0f";
         // When
         Value testValue = new Value(testValue1);
         // Then

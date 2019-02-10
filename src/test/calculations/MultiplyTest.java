@@ -10,8 +10,8 @@ public class MultiplyTest {
     @Test
     public void testMultiply() {
         // Given
-        Calculations testValue1 = new Value(4);
-        Calculations testValue2 = new Value(3);
+        Calculations testValue1 = new Value("4");
+        Calculations testValue2 = new Value("3");
         // When
         Multiply testMultiply = new Multiply(testValue1, testValue2);
         // Then
