@@ -1,3 +1,6 @@
+import calculations.Add;
+import calculations.Calculations;
+import calculations.Value;
 import org.junit.Test;
 
 public class AddTest {

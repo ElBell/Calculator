@@ -1,3 +1,6 @@
+import calculations.Calculations;
+import calculations.Multiply;
+import calculations.Value;
 import org.junit.Test;
 
 public class MultiplyTest {

@@ -1,3 +1,5 @@
+package calculations;
+
 import calculations.Calculations;
 
 public class Value implements Calculations {

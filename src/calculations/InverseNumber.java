@@ -1,3 +1,6 @@
+package calculations;
+
+import calculations.Calculations;
 
 // should be flipped sign not invserse
 public class InverseNumber implements Calculations {

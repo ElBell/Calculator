@@ -1,4 +1,8 @@
-public class Subtract implements Calculations{
+package calculations;
+
+import calculations.Calculations;
+
+public class Subtract implements Calculations {
     Calculations left;
     Calculations right;
     public Subtract(Calculations left, Calculations right) {

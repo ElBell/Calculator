@@ -1,3 +1,6 @@
+package calculations;
+
+import calculations.Calculations;
 
 public class SquareRoot implements Calculations {
     Calculations left;

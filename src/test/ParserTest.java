@@ -29,16 +29,39 @@ public class ParserTest {
     }
 
     @Test
-    public void testSortByOperation() {
+    public void testSortByOperation1() {
         // Given
         List<String> testList = Arrays.asList("(", "5", "+", "5", "*", "18", "+", "4", ")");
         // When
         List<String> actualList = parser.sortByOperation(testList);
         // Then
-        List<String> expectedList = Arrays.asList("5", "18", "*", "5", "+", "4");
+        List<String> expectedList = Arrays.asList("5", "5", "18", "*", "+", "4", "+");
         Assert.assertEquals(expectedList, actualList);
 
     }
 
+    @Test
+    public void testSortByOperation2() {
+        // Given
+        List<String> testList = Arrays.asList("square", "(", "5", "+", "5", "*", "18", "+", "4", ")");
+        // When
+        List<String> actualList = parser.sortByOperation(testList);
+        // Then
+        List<String> expectedList = Arrays.asList("5", "5", "18", "*", "+", "4", "+", "square");
+        Assert.assertEquals(expectedList, actualList);
+
+    }
+
+    @Test
+    public void testSortByOperation3() {
+        // Given
+        List<String> testList = Arrays.asList("square", "(", "5", "+", "square", "(", "5", ")", "*", "18", "+", "4", ")");
+        // When
+        List<String> actualList = parser.sortByOperation(testList);
+        // Then
+        List<String> expectedList = Arrays.asList("5", "5", "square", "18", "*", "+", "4", "+", "square");
+        Assert.assertEquals(expectedList, actualList);
+
+    }
 
 }

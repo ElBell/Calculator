@@ -1,3 +1,7 @@
+import calculations.Calculations;
+import calculations.Exponent;
+import calculations.Value;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ExponentTest {
@@ -7,6 +11,7 @@ public class ExponentTest {
         Calculations testValue2 = new Value(3);
         Exponent addTest = new Exponent(testValue1, testValue2);
         float result = addTest.evaluate();
-        System.out.println(result);
+        Assert.assertEquals(125.0f, result, .001);
     }
+
 }

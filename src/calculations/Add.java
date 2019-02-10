@@ -1,3 +1,7 @@
+package calculations;
+
+import calculations.Calculations;
+
 public class Add implements Calculations{
     Calculations left;
     Calculations right;

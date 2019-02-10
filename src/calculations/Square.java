@@ -1,3 +1,7 @@
+package calculations;
+
+import calculations.Calculations;
+
 public class Square implements Calculations {
     Calculations left;
 

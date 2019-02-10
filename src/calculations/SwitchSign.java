@@ -1,4 +1,8 @@
-public class SwitchSign implements Calculations{
+package calculations;
+
+import calculations.Calculations;
+
+public class SwitchSign implements Calculations {
     Calculations left;
     public SwitchSign(Calculations left) {
         this.left = left;

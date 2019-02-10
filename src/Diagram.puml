@@ -7,7 +7,7 @@ interface Collection
 
 class ScientificCalculator {
 String expression = Display.getString("Imput calculation");
-Calculations calculation = Parse.parse(expression);
+calculations.Calculations calculation = Parse.parse(expression);
 Number result = calculation.evaluate();
 Display.println(result);
 }
@@ -21,22 +21,22 @@ public String getString(message to user)
 public println(result)
 }
 
-Interface Calculations {
+Interface calculations.Calculations {
 public Number evaluate()
 }
 
-class Value extends Calculations {
+class calculations.Value extends calculations.Calculations {
    Number evaluate(Number number)
    { return number; }
 }
 
-class Add extends Calculations {
+class calculations.Add extends calculations.Calculations {
     Number evaluate(Calculation left, Calculation right) {
         return left.evaluate() + right.evaluate(); }
 
 }
 
-class Square extends Calculations {
+class calculations.Square extends calculations.Calculations {
     Number evaluate(Calculation arg)
     {Math.pow(arg.evaluate(), 2)};
 }

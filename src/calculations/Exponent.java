@@ -1,3 +1,7 @@
+package calculations;
+
+import calculations.Calculations;
+
 public class Exponent implements Calculations {
     Calculations left;
     Calculations right;

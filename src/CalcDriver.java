@@ -4,39 +4,28 @@ public class CalcDriver {
     public CalcDriver() {
 
 
-
-        boolean cont = true;
-        String expression ="";
+        boolean stillRunning = true;
+        String expression = "";
         Console io = new Console();
-        Calculations calculation =  new Calculations();
         float actualResult;
 
         // Elenor's parser
-        Parser ps= new Parser();
+        Parser ps = new Parser();
 
         io.print("Exit to quit");
 
-        while (cont){
+        while (stillRunning) {
 
 
             io.print("Expression");
             expression = io.getStringInput("");
 
-             if("exit".equals(expression.toLowerCase()))
-            {
-             cont=false;
-             }
-             else {
-                 // need to check
-                 calculations = ps.parse(expression);
-                 // double check below line
-                 actualResult = ((Calculation) calculation).evaluate();
+            if ("exit".equals(expression.toLowerCase())) {
+                stillRunning = false;
+            }
 
-                 io.print("%f", actualResult);
-             }
+
         }
-
-
     }
-
 }
+

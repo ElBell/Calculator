@@ -1,3 +1,4 @@
+import calculations.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,10 +11,10 @@ public class MathTest {
     Calculations small = new Value(3);
     Calculations med = new Value(9);
 
-      inverseNum inverseNeg = new inverseNum(valueNeg);
-    inverseNum inversePos= new inverseNum(valuePos);
+      InverseNumber inverseNeg = new InverseNumber(valueNeg);
+    InverseNumber inversePos= new InverseNumber(valuePos);
       Square square = new Square(small);
-      SqrtRoot sqrtRoot = new SqrtRoot(med);
+      SquareRoot squareRoot = new SquareRoot(med);
 
 
     @Test
@@ -60,7 +61,7 @@ public class MathTest {
         float expected = 3;
 
         // : When
-        float actual = sqrtRoot.evaluate();
+        float actual = squareRoot.evaluate();
         // : Then
 
         assertEquals( expected, actual, 0.02);

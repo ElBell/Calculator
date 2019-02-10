@@ -1,5 +1,8 @@
+package calculations;
 
-public class Factorial implements Calculations{
+import calculations.Calculations;
+
+public class Factorial implements Calculations {
     Calculations left;
     public Factorial(Calculations left) {
         this.left = left;

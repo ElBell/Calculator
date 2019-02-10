@@ -1,3 +1,6 @@
+import calculations.Calculations;
+import calculations.Subtract;
+import calculations.Value;
 import org.junit.Test;
 
 public class SubtractTest {
