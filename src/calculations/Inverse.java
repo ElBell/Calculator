@@ -3,10 +3,10 @@ package calculations;
 import calculations.Calculations;
 
 // should be flipped sign not invserse
-public class InverseNumber implements Calculations {
+public class Inverse implements Calculations {
     Calculations left;
 
-    public InverseNumber(Calculations left){
+    public Inverse(Calculations left){
          this.left = left;
     };
 

@@ -11,8 +11,8 @@ public class MathTest {
     Calculations small = new Value(3);
     Calculations med = new Value(9);
 
-      InverseNumber inverseNeg = new InverseNumber(valueNeg);
-    InverseNumber inversePos= new InverseNumber(valuePos);
+      Inverse inverseNeg = new Inverse(valueNeg);
+    Inverse inversePos= new Inverse(valuePos);
       Square square = new Square(small);
       SquareRoot squareRoot = new SquareRoot(med);
 
