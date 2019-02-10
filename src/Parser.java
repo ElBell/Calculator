@@ -1,5 +1,4 @@
 import calculations.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -18,7 +17,7 @@ public class Parser {
 
     public List<String> breakIntoArray(String toBreak){
         toBreak = toBreak.replaceAll("\\s+","").toLowerCase();
-        String OPERATORS = "([\\(\\)+*/-])";
+        String OPERATORS = "([\\(\\)+*/-\\^])";
         String NUMBERS = "(\\d+(\\.\\d+)?)";
         String LETTERS = "([a-z]+)";
         String REGEX = NUMBERS+"|"+OPERATORS+"|"+LETTERS;

@@ -23,7 +23,7 @@ public class CalculatorDisplay extends JFrame {
     String currentDisplayMode = "Float";
 
     String[] buttonLabels = {"  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  ", "  8  ", "  9  ",
-                            "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "Exponent", "Square", "SquareRoot", "Factorial",
+                            "  0  ", "  +  ", "  -  ", "  *  ", "  /  ", "  ^  ", "Square", "SquareRoot", "Factorial",
                             "Inverse", "Sine", "Cosine", "Tangent", "InverseSine", "InverseCosine", "InverseTangent",
                             "Logarithm", "Inverselogarithm", "NaturalLogarithm",  "InverseNaturalLogarithm" ,
                             "  .  ", "  ,  ", "  (  ", ")"};
