@@ -1,4 +1,7 @@
 import calculations.Calculations;
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.DisplayMode;
+import calculatorOptions.UnitsMode;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,9 +33,9 @@ import java.util.Map;
             launch(args);
         }
         private static final String[][] template = {
-                { "0", "1", "2" },
-                { "3", "4", "6",},
-                { "7", "8", "9" },
+                { "1", "2", "3", "4" },
+                { "5", "6", "7", "8" },
+                { "9", "0", ")", "(" },
                 { "+", "-", "/", "*", "^"},
                 { "sqrt", "factorial", "log" },
                 { "sin", "cos", "tan"},
@@ -41,7 +44,8 @@ import java.util.Map;
                 { "inverseLog", "naturalLog"},
                 { "inverseNatural Log"},
                 { "M+", "Mc", "Mrecall"},
-                { "XOR", "c", "="},
+                { "XOR", "clear", "="},
+                { "SwitchDisplayMode", "Radians/Degrees"}
 
         };
 
@@ -130,7 +134,7 @@ import java.util.Map;
         private Button createButton(final String s) {
             Button button = makeStandardButton(s);
 
-            if ("c".equals(s)) {
+            if ("clear".equals(s)) {
                 makeClearButton(button);
             } else if ("=".equals(s)) {
                 makeEqualsButton(button);
@@ -140,9 +144,14 @@ import java.util.Map;
                 makeMemoryClearButton(button);
             } else if ("Mrecall".equals(s)) {
                 makeMemoryRecallButton(button);
+            } else if ("SwitchDisplayMode".equals(s)) {
+                makeSwitchDisplayModeButton(button);
+            } else if ("Radians/Degrees".equals(s)) {
+                makeSwitchUnitsModeButton(button);
             } else {
                 makeDefaultButton(button, s);
             }
+
 
             return button;
         }
@@ -189,7 +198,6 @@ import java.util.Map;
         }
 
         private void makeMemoryRecallButton(Button button) {
-            accelerators.put("delete", button);
             button.setStyle("-fx-base: lavender;");
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -201,7 +209,6 @@ import java.util.Map;
         }
 
         private void makeClearButton(Button button) {
-            accelerators.put("delete", button);
             button.setStyle("-fx-base: mistyrose;");
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -212,17 +219,46 @@ import java.util.Map;
             });
         }
 
+        private void makeSwitchDisplayModeButton(Button button) {
+            button.setStyle("-fx-base: GOLD;");
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CalculatorOptions mode = CalculatorOptions.getInstance();
+                    mode.rotateMode();
+                    currentInput = "";
+                    currentValue.set("Display mode is now: " + mode.getDisplayMode());
+                }
+            });
+        }
+
+        private void makeSwitchUnitsModeButton(Button button) {
+            button.setStyle("-fx-base: GOLD;");
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CalculatorOptions mode = CalculatorOptions.getInstance();
+                    mode.rotateUnits();
+                    currentInput = "";
+                    currentValue.set("Units mode is now: " + mode.getUnitsMode());
+                }
+            });
+        }
+
         private void makeEqualsButton(Button button) {
             button.setStyle("-fx-base: ghostwhite;");
             accelerators.put("enter", button);
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    Calculations calculations = calcParser.parse(currentInput);
-                    Float answer = calculations.evaluate();
                     history = currentInput;
-                    currentInput = Float.toString(answer);
-                    currentValue.set(Float.toString(answer));
+                    Calculations calculations = calcParser.parse(currentInput);
+                    Float numAnswer = calculations.evaluate();
+                    DisplayMode displayMode = CalculatorOptions.getInstance().getDisplayMode();
+                    UnitsMode unitsMode = CalculatorOptions.getInstance().getUnitsMode();
+                    String answer = displayMode.convertToMode(unitsMode.convertToMode(numAnswer));
+                    currentInput = answer;
+                    currentValue.set(answer);
 
                 }
             });

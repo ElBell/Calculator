@@ -129,7 +129,6 @@ public class Parser {
     }
 
 
-
     public static void generateInverseLogarithm(Stack<Calculations> calculationsStack) {
         Calculations value = calculationsStack.pop();
         InverseLogarithm calculations = new InverseLogarithm(value);

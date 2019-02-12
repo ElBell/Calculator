@@ -1,5 +1,8 @@
 package calculations;
 
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.UnitsMode;
+
 import static java.lang.Math.toRadians;
 
 public class InverseSine implements Calculations {
@@ -8,6 +11,7 @@ public class InverseSine implements Calculations {
         this.left = left;
     }
     public float evaluate() {
-        return (float) Math.asin(left.evaluate());
+        UnitsMode mode = CalculatorOptions.getInstance().getUnitsMode();
+        return (float) Math.asin(mode.convertFromMode(left.evaluate()));
     }
 }

@@ -11,7 +11,7 @@ public class Value implements Calculations {
      public Value(float number){
         this.number = Float.toString(number);
     }
-    public Value(int number){
+     public Value(int number){
         this.number = Integer.toString(number);
     }
      public float evaluate() {

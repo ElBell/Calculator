@@ -33,4 +33,10 @@ public class CalculatorOptions {
     public void rotateMode() {
         this.displayMode = this.displayMode.getNextMode();
     }
+
+    public void rotateUnits() {
+        this.unitsMode = this.unitsMode.getNextMode();
+    }
+
+
 }

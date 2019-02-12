@@ -3,23 +3,23 @@ package calculatorOptions;
 public enum UnitsMode {
     DEGREES, RADIANS;
 
-    public float convertFromMode(String number) {
+    public float convertFromMode(float number) {
         switch (this) {
             case DEGREES:
-                //return Math.toRadians(Float.parseFloat(number));
+                return (float) Math.toRadians((double)number);
             case RADIANS:
             default:
-                return Float.parseFloat(number);
+                return number;
         }
     }
 
-    public String convertToMode(float number) {
+    public float convertToMode(float number) {
         switch (this) {
             case DEGREES:
-                return Float.toHexString(number);
+                return (float) Math.toDegrees((double)number);
             case RADIANS:
             default:
-                return Float.toString(number);
+                return number;
         }
     }
 

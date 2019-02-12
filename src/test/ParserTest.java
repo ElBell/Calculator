@@ -91,6 +91,97 @@ public class ParserTest {
     }
 
     @Test
+    public void testGenerateCosine() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(0));
+        //When
+        parser.generateCosine(testCalculationStack);
+        //Then
+        Float expectedAnswer = 1f;
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateSine() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //Whens
+        parser.generateSine(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new Sine(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateTangent() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateTangent(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new Tangent(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateInverseTangent() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateInverseTangent(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new InverseTangent(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateInverseSine() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateInverseSine(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new InverseSine(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateInverseCosine() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateInverseCosine(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new InverseCosine(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+
+
+    @Test
     public void testGenerateSwitchSign() {
         // Given
         Stack<Calculations> testCalculationStack = new Stack<>();
@@ -230,6 +321,84 @@ public class ParserTest {
     }
 
     @Test
+    public void testGenerateLogarithm() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateLogarithm(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new Logarithm(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateInverseLogarithm() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateInverseLogarithm(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new InverseLogarithm(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateNaturalLogarithm() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateNaturalLogarithm(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new NaturalLogarithm(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testGenerateInverseNaturalLogarithm() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateInverseNaturalLogarithm(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new InverseNaturalLogarithm(new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+
+
+    @Test
+    public void testGenerateXor() {
+        // Given
+        Stack<Calculations> testCalculationStack = new Stack<>();
+        testCalculationStack.add(new Value(2));
+        testCalculationStack.add(new Value(5));
+        //When
+        parser.generateXOR(testCalculationStack);
+        //Then
+        Calculations expectedCalculations = new Xor(new Value(5), new Value(2));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Calculations actualCalculations = testCalculationStack.pop();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
     public void testGenerateValue() {
         // Given
         Stack<Calculations> testCalculationStack = new Stack<>();
@@ -259,7 +428,6 @@ public class ParserTest {
         Assert.assertEquals(expectedAnswer, actualAnswer);
     }
 
-    /*
     @Test
     public void testGenerateSubtractNone() {
         // Given
@@ -273,7 +441,7 @@ public class ParserTest {
         Calculations actualCalculations = testCalculationStack.pop();
         Float actualAnswer = actualCalculations.evaluate();
         Assert.assertEquals(expectedAnswer, actualAnswer);
-    }*/
+    }
 
     @Test
     public void testIsNumericTrue() {
@@ -334,6 +502,42 @@ public class ParserTest {
     }
 
     @Test
+    public void testParseCalculations3() {
+        // Given
+        List<String> testList = new ArrayList<>();
+        testList.add("5");
+        testList.add("3");
+        testList.add("/");
+        testList.add("8");
+        testList.add("*");
+        // When
+        Calculations actualCalculations = parser.parseCalculations(testList);
+        //Then
+        Calculations expectedCalculations = new Multiply(new Divide(new Value(5), new Value(3)), new Value(8));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+    @Test
+    public void testParseCalculations4() {
+        // Given
+        List<String> testList = new ArrayList<>();
+        testList.add("5");
+        testList.add("3");
+        testList.add("^");
+
+        // When
+        Calculations actualCalculations = parser.parseCalculations(testList);
+        //Then
+        Calculations expectedCalculations = new Exponent(new Value(3), new Value(5));
+        Float expectedAnswer = expectedCalculations.evaluate();
+        Float actualAnswer = actualCalculations.evaluate();
+        Assert.assertEquals(expectedAnswer, actualAnswer);
+    }
+
+
+    @Test
     public void testHex() {
         CalculatorOptions.getInstance().setDisplayMode(DisplayMode.HEXADECIMAL);
         // Given
@@ -358,9 +562,7 @@ public class ParserTest {
         // When
         Parser parse = new Parser();
         List<String> testList = parse.breakIntoArray(hexCalculation);
-        System.out.println(testList);
         List<String> sortedInput = parse.sortByOperation(testList);
-        System.out.println(sortedInput);
         Calculations actualCalculations = parser.parseCalculations(sortedInput);
 
         //Then;

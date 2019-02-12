@@ -1,5 +1,8 @@
 package calculations;
 
+import calculatorOptions.CalculatorOptions;
+import calculatorOptions.UnitsMode;
+
 import static java.lang.Math.toRadians;
 
 public class InverseTangent implements Calculations {
@@ -9,6 +12,7 @@ public class InverseTangent implements Calculations {
         this.left = left;
     }
     public float evaluate() {
-        return (float) Math.atan(left.evaluate());
+        UnitsMode mode = CalculatorOptions.getInstance().getUnitsMode();
+        return (float) Math.atan(mode.convertFromMode(left.evaluate()));
     }
 }
