@@ -8,18 +8,6 @@ public class Divide implements Calculations{
         this.right = right;
     }
     public float evaluate() {
-        float value =0;
-        try {
-            value = left.evaluate() / right.evaluate();
-        }
-        catch (Exception e) {
-            System.err.print("Error");
-        } finally {
-            return value;
-        }
-            //return value;
-
-
-
+       return left.evaluate() / right.evaluate();
     }
 }

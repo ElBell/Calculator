@@ -1,6 +1,5 @@
 package calculator.parser;
 
-import calculations.*;
 import calculator.calculations.*;
 
 import java.util.*;
@@ -10,19 +9,15 @@ import java.util.regex.Pattern;
 import static calculator.parser.CalculationsEnum.*;
 
 public class Parser {
-    public Parser() {
-
-    }
-    public Calculations parse(String rawInput){
+    public static Calculations parse(String rawInput){
         List<String> brokenInput = breakIntoArray(rawInput);
         List<String> sortedInput = sortByOperation(brokenInput);
-        Calculations calculationsStack = parseCalculations(sortedInput);
-        return calculationsStack;
+        return parseCalculations(sortedInput);
     }
 
-    public List<String> breakIntoArray(String toBreak){
+    public static List<String> breakIntoArray(String toBreak){
         toBreak = toBreak.replaceAll("\\s+","").toLowerCase();
-        String OPERATORS = "([\\(\\)+*/\\-\\^])";
+        String OPERATORS = "([()+*/\\-^])";
         String NUMBERS = "([\\dacbdef]+(\\.\\d+)?)";
         String LETTERS = "([a-z]+)";
         String REGEX = NUMBERS+"|"+OPERATORS+"|"+LETTERS;
@@ -46,7 +41,7 @@ public class Parser {
         return brokenString;
     }
 
-    public List<String> sortByOperation(List<String> unsortedBroken){
+    public static List<String> sortByOperation(List<String> unsortedBroken){
         //Djikstra's Shunting Yard
         return ShuntingYard.postfix(unsortedBroken);
     }
@@ -69,9 +64,7 @@ public class Parser {
         CalculationsEnum calculation = possibleUserInputs.get(current);
         Calculations valueRight = calculationsStack.pop();
         if (calculation.requiresTwoNumbers()) {
-            if (calculationsStack.size() == 0) {
-                calculationsStack.push(new Value("0"));
-            }
+            if (calculationsStack.size() == 0) { calculationsStack.push(new Value("0")); }
             Calculations valueLeft = calculationsStack.pop();
             calculationsStack.push(calculation.generate(valueLeft, valueRight));
         } else {

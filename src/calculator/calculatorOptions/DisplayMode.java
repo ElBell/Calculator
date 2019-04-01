@@ -2,39 +2,18 @@ package calculator.calculatorOptions;
 
 public enum DisplayMode {
 
-    /**
-     *
-     *     BINARY(        (number, someString) -> {
-     *         Integer hexNumber = Integer.parseInt(number, 16);
-     *         return (float)hexNumber;
-     *     }),
-     *     OCTAL,
-     *     DECIMAL,
-     *     HEXADECIMAL;
-     *     private final Function<String, Float> functionToBeCalled;
-     *
-     *     DisplayMode(BiFunction<String, String, Float> functionToBeCalled) {
-     *         this.functionToBeCalled = functionToBeCalled;
-     *     }
-     *     public Object convert(String number) {
-     *
-     *         function.apply()
-     *
-     *     }
-     */
-
     BINARY, OCTAL, DECIMAL, HEXADECIMAL;
 
     public float convertFromMode(String number) {
         switch (this) {
             case HEXADECIMAL:
-                Integer hexNumber = Integer.parseInt(number, 16);
+                int hexNumber = Integer.parseInt(number, 16);
                 return (float)hexNumber;
             case BINARY:
-                Integer binaryNumber = Integer.parseInt(number, 2);
+                int binaryNumber = Integer.parseInt(number, 2);
                 return (float)(binaryNumber);
             case OCTAL:
-                Integer octalNumber = Integer.parseInt(number, 8);
+                int octalNumber = Integer.parseInt(number, 8);
                 return (float)octalNumber;
             case DECIMAL:
             default:

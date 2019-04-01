@@ -12,6 +12,10 @@ public class CalculatorOptions {
         this.displayMode = displayMode;
     }
 
+    public void setUnitsMode(UnitsMode unitsMode) {
+        this.unitsMode = unitsMode;
+    }
+
     private DisplayMode displayMode = DisplayMode.DECIMAL;
 
     public UnitsMode getUnitsMode() {

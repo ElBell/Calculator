@@ -9,8 +9,6 @@ import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,6 +33,7 @@ import java.util.Map;
         public static void main(String[] args){
             launch(args);
         }
+
         private static final String[][] template = {
                 { "1", "2", "3"},
                 { "4", "5", "6"},
@@ -56,10 +55,6 @@ import java.util.Map;
         private final Map<String, Button> accelerators = new HashMap<>();
 
         private StringProperty currentValue = new SimpleStringProperty();
-
-        public static void launchCalc(String... args) {
-            launch(args);
-        }
 
         @Override
         public void start(Stage stage) {
@@ -85,28 +80,25 @@ import java.util.Map;
         }
 
         private void handleAccelerators(VBox layout) {
-            layout.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent keyEvent) {
-                    String currentPress = keyEvent.getText();
-                    if (accelerators.containsKey(currentPress)) {
-                        Button activated = accelerators.get(keyEvent.getText());
-                        activated.fire();
-                    } else if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                        history = currentInput;
-                        accelerators.get("enter").fire();
-                    } else if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
-                        if (currentInput.length() > 0) {
-                            currentInput = currentInput.substring(0, currentInput.length() - 1);
-                            currentValue.set(currentInput);
-                        }
-                    } else if (keyEvent.getCode().equals(KeyCode.DOWN)) {
-                        currentInput = history;
-                        currentValue.set(currentInput);
-                    } else {
-                        currentInput += keyEvent.getText();
+            layout.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+                String currentPress = keyEvent.getText();
+                if (accelerators.containsKey(currentPress)) {
+                    Button activated = accelerators.get(keyEvent.getText());
+                    activated.fire();
+                } else if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    history = currentInput;
+                    accelerators.get("enter").fire();
+                } else if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
+                    if (currentInput.length() > 0) {
+                        currentInput = currentInput.substring(0, currentInput.length() - 1);
                         currentValue.set(currentInput);
                     }
+                } else if (keyEvent.getCode().equals(KeyCode.DOWN)) {
+                    currentInput = history;
+                    currentValue.set(currentInput);
+                } else {
+                    currentInput += keyEvent.getText();
+                    currentValue.set(currentInput);
                 }
             });
         }
@@ -162,12 +154,9 @@ import java.util.Map;
 
         private void makeDefaultButton(Button button, final String label) {
             button.setStyle("-fx-base: lightblue;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    currentInput += label;
-                    currentValue.set(currentInput);
-                }
+            button.setOnAction(actionEvent -> {
+                currentInput += label;
+                currentValue.set(currentInput);
             });
         }
 
@@ -183,90 +172,67 @@ import java.util.Map;
 
         private void makeMemoryAddButton(Button button) {
             button.setStyle("-fx-base: lavender;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    memory = currentInput;
-                }
-            });
+            button.setOnAction(actionEvent -> memory = currentInput);
         }
 
         private void makeMemoryClearButton(Button button) {
             button.setStyle("-fx-base: lavender;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    memory = "";
-                }
-            });
+            button.setOnAction(actionEvent -> memory = "");
         }
 
         private void makeMemoryRecallButton(Button button) {
             button.setStyle("-fx-base: lavender;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    currentInput += memory;
-                    currentValue.set(currentInput);
-                }
+            button.setOnAction(actionEvent -> {
+                currentInput += memory;
+                currentValue.set(currentInput);
             });
         }
 
         private void makeClearButton(Button button) {
             button.setStyle("-fx-base: mistyrose;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    currentValue.set("0");
-                    currentInput = "";
-                }
+            button.setOnAction(actionEvent -> {
+                currentValue.set("0");
+                currentInput = "";
             });
         }
 
         private void makeSwitchDisplayModeButton(Button button) {
             button.setStyle("-fx-base: GOLD;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    CalculatorOptions mode = CalculatorOptions.getInstance();
-                    mode.rotateMode();
-                    currentInput = "";
-                    currentValue.set("Display mode is now: " + mode.getDisplayMode());
-                }
+            button.setOnAction(actionEvent -> {
+                CalculatorOptions mode = CalculatorOptions.getInstance();
+                mode.rotateMode();
+                currentInput = "";
+                currentValue.set("Display mode is now: " + mode.getDisplayMode());
             });
         }
 
         private void makeSwitchUnitsModeButton(Button button) {
             button.setStyle("-fx-base: GOLD;");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    CalculatorOptions mode = CalculatorOptions.getInstance();
-                    mode.rotateUnits();
-                    currentInput = "";
-                    currentValue.set("Units mode is now: " + mode.getUnitsMode());
-                }
+            button.setOnAction(actionEvent -> {
+                CalculatorOptions mode = CalculatorOptions.getInstance();
+                mode.rotateUnits();
+                currentInput = "";
+                currentValue.set("Units mode is now: " + mode.getUnitsMode());
             });
         }
 
         private void makeEqualsButton(Button button) {
             button.setStyle("-fx-base: ghostwhite;");
             accelerators.put("enter", button);
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    history = currentInput;
-                    Calculations calculations = calcParser.parse(currentInput);
+            button.setOnAction(actionEvent -> {
+                history = currentInput;
+                Calculations calculations = calcParser.parse(currentInput);
+                try {
                     Float numAnswer = calculations.evaluate();
                     DisplayMode displayMode = CalculatorOptions.getInstance().getDisplayMode();
                     UnitsMode unitsMode = CalculatorOptions.getInstance().getUnitsMode();
                     String answer = displayMode.convertToMode(unitsMode.convertToMode(numAnswer));
                     currentInput = answer;
                     currentValue.set(answer);
-
+                } catch (Exception e) {
+                    currentValue.set("Error");
                 }
             });
         }
-
 
     }
